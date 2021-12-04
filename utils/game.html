@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>HangMan</title>
+	
+	<style type="text/css">
+		.tableHang {
+			border: 2;
+			width: 500px;
+			height: 550px;
+			background-color: #EEEEEE;
+			background: url("./imgs/hang.png");
+			background-repeat: no-repeat;
+			background-size: cover;
+			margin: 0px;
+		}
+		
+		td {
+			text-align: center;
+		}
+		
+		.resultMask {
+			position: absolute;
+			background: white;
+			left: 200px;
+			top: 10px;
+			box-shadow: 10px 5px 5px gray;
+			font-size: 46px;
+			font-weight: bold;
+			border-radius: 10px;
+		}
+		
+		.gameOver {
+			position: absolute;
+			background: white;
+			left: 100px;
+			top: 190px;
+			box-shadow: 10px 5px 5px gray;
+			font-size: 36px;
+			color: #0055FF;
+			font-weight: bold;
+			border-radius: 10px;
+		}
+	</style>
+
+	<script>
+		const loadMask = async () => {
+			const response = await fetch('http://localhost:9090/hang-man/game');
+			const respText = await response.text();
+
+			resultTxt.innerHTML = respText;
+		};
+	
+		const playLetter = async (letter) => {
+			if (!letter) {
+				alert('Informe uma letra.');
+				return;
+			}
+
+			const response = await fetch('http://localhost:9090/hang-man/game/play?letter=' + letter);
+			const respJson = await response.json();
+
+			resultTxt.innerHTML = respJson.result;
+			listAttempt.innerHTML = respJson.listAttempt;
+			imgHead.style.visibility = respJson.wrongAttempts >= 1? 'visible' : 'hidden';
+			imgBody.style.visibility = respJson.wrongAttempts >= 2? 'visible' : 'hidden';
+			imgRightArm.style.visibility = respJson.wrongAttempts >= 3? 'visible' : 'hidden';
+			imgLeftArm.style.visibility = respJson.wrongAttempts >= 4? 'visible' : 'hidden';
+			imgRightLeg.style.visibility = respJson.wrongAttempts >= 5? 'visible' : 'hidden';
+			imgLeftLeg.style.visibility = respJson.wrongAttempts >= 6? 'visible' : 'hidden';
+
+			if (respJson.gameOver) {
+				gameOver.style.display = 'block';
+				gameOver.innerHTML = respJson.msg;
+			}
+			
+			console.log(respJson);
+		};
+
+		loadMask();
+	</script>
+</head>
+<body>
+	<table class="tableHang">
+		<tr style="height: 100px;">
+			<td rowspan="6" style="width: 295px"></td>
+			<td colspan="3"></td>
+			<td rowspan="6" style="width: 90px"></td>
+		</tr>
+		<tr style="height: 10px;">
+			<td colspan="3">
+				<img id="imgHead" src="./imgs/hangedHead.gif" width="50" style="visibility: hidden;">
+			</td>
+		</tr>
+		<tr style="height: 10px;">
+			<td style="text-align: right;">
+				<img id="imgRightArm" src="./imgs/hangedRightArm.gif" width="20" style="visibility: hidden;">
+			</td>
+			<td>
+				<img id="imgBody" src="./imgs/hangedBody.gif" width="75" style="visibility: hidden;">
+			</td>
+			<td style="text-align: left;">
+				<img id="imgLeftArm" src="./imgs/hangedLeftArm.gif" width="20" style="visibility: hidden;">
+			</td>
+		</tr>
+		<tr>
+			<td style="height: 10px;" colspan="3">
+				<table>
+					<tr style="height: 10px;">
+						<td style="width: 18px;"></td>
+						<td>
+							<img id="imgRightLeg" src="./imgs/hangedRightLeg.gif" width="30" style="visibility: hidden; margin-bottom: 100%">
+						</td>
+						<td></td>
+						<td>
+							<img id="imgLeftLeg" src="./imgs/hangedLeftLeg.gif" width="30" style="visibility: hidden; margin-bottom: 100%">
+						</td>					
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	
+	<br>
+
+	<div id="resultTxt" class="resultMask"></div>
+
+	<input id="txtLetter" size="2" maxlength="1">
+	<input id="btPlay" type="button" value="Play" onClick="playLetter(txtLetter.value); txtLetter.value = ''"/>
+	<p><b>Lista de Tentativas: </b><span id="listAttempt" style="font-size: 18px"></span></p>
+	
+	<div id="gameOver" class="gameOver" style="display: none"></div>
+</body>
+</html>
