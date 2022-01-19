@@ -1,28 +1,75 @@
 package com.project.hangman.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Palavra {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private @NotBlank @Min(1) String palavra;
 	private @NotBlank @Min(1) String descricao;
-	private @NotBlank @Min(1) String dica;
+	
+	@OneToMany(mappedBy = "dica")
+	private @NotBlank @Min(1) List<Dica> dica;
+	
 	private @NotNull Integer tamanhoPalavra;
 	
-	public Palavra(@NotBlank @Min(1) String palavra, @NotBlank @Min(1) String descricao, @NotBlank @Min(1) String dica) {
-		super();
+	public Palavra(@NotBlank @Min(1) String palavra, @NotBlank @Min(1) String descricao, @NotNull Dica dica) {
 		this.palavra = palavra;
 		this.descricao = descricao;
-		this.dica = dica;
+		this.dica.add(dica);
 		this.tamanhoPalavra = palavra.length();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPalavra() {
+		return palavra;
+	}
+
+	public void setPalavra(String palavra) {
+		this.palavra = palavra;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public List<Dica> getDica() {
+		return dica;
+	}
+
+	public void setDica(List<Dica> dica) {
+		this.dica = dica;
+	}
+
+	public Integer getTamanhoPalavra() {
+		return tamanhoPalavra;
+	}
+
+	public void setTamanhoPalavra(Integer tamanhoPalavra) {
+		this.tamanhoPalavra = tamanhoPalavra;
 	}
 
 	@Override
