@@ -1,5 +1,6 @@
 package com.project.hangman.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,14 +22,14 @@ public class Palavra {
 	private @NotBlank @Min(1) String descricao;
 	
 	@OneToMany(mappedBy = "dica")
-	private @NotBlank @Min(1) List<Dica> dica;
+	private @NotBlank @Min(1) List<Dica> dica = new ArrayList<Dica>();
 	
 	private @NotNull Integer tamanhoPalavra;
 	
-	public Palavra(@NotBlank @Min(1) String palavra, @NotBlank @Min(1) String descricao, @NotNull Dica dica) {
+	public Palavra(@NotBlank @Min(1) String palavra, @NotBlank @Min(1) String descricao, @NotNull List<Dica> dica) {
 		this.palavra = palavra;
 		this.descricao = descricao;
-		this.dica.add(dica);
+		this.dica.addAll(dica);
 		this.tamanhoPalavra = palavra.length();
 	}
 	
