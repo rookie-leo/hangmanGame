@@ -1,15 +1,15 @@
 package com.project.hangman.controller.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.project.hangman.model.Dica;
 import com.project.hangman.model.Palavra;
 
 public class PalavraResponse {
 	
 	private String palavra;
 	private String descricao;
-	private List<Dica> dicas;
+	private List<String> dicas = new ArrayList<String>();
 	private Integer tamanhoPalavra;
 	
 	public PalavraResponse() {}
@@ -18,7 +18,7 @@ public class PalavraResponse {
 		super();
 		this.palavra = response.getPalavra();
 		this.descricao = response.getDescricao();
-		this.dicas = response.getDica();
+		this.dicas.addAll(response.getDica());
 		this.tamanhoPalavra = response.getTamanhoPalavra();
 	}
 
@@ -30,7 +30,7 @@ public class PalavraResponse {
 		return descricao;
 	}
 
-	public List<Dica> getDicas() {
+	public List<String> getDicas() {
 		return dicas;
 	}
 
