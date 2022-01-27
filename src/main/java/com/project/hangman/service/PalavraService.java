@@ -16,16 +16,13 @@ public class PalavraService {
 	
 	@Autowired
 	private PalavraRepository repository;
-	
-//	private DicaRepository dicaRepo;
-	
+		
 	@Transactional
 	public void cadastrar(PalavraRequest request) {
+		System.out.println(request.getDica());
 		Palavra palavra = request.toModel();
-		repository.save(palavra);
-		
-		
-//		dicaRepo.saveAll(palavra.getDica());
+		System.out.println(palavra.getDica());
+		repository.save(palavra);	
 	}
 	
 	public List<Palavra> listar() {

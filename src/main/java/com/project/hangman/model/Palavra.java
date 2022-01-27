@@ -1,9 +1,5 @@
 package com.project.hangman.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,28 +10,23 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Palavra {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private @NotBlank @Min(1) String palavra;
-	private @NotBlank @Min(1) String descricao;
-	
-//	@OneToMany(mappedBy = "dica")
-	@ElementCollection
-	private @NotBlank @Min(1) List<String> dicas = new ArrayList<String>();
-	
+	private @NotBlank @Min(1) String dica;
 	private @NotNull Integer tamanhoPalavra;
-	
-	public Palavra() {}
-	
-	public Palavra(@NotBlank @Min(1) String palavra, @NotBlank @Min(1) String descricao, @NotNull List<String> dica) {
+
+	public Palavra() {
+	}
+
+	public Palavra(@NotBlank @Min(1) String palavra, @NotBlank @Min(1) String dica) {
 		this.palavra = palavra;
-		this.descricao = descricao;
-		this.dicas.addAll(dicas);
+		this.dica = dica;
 		this.tamanhoPalavra = palavra.length();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -52,21 +43,12 @@ public class Palavra {
 		this.palavra = palavra;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getDica() {
+		return dica;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	@ElementCollection
-	public List<String> getDica() {
-		return dicas;
-	}
-
-	public void setDica(List<String> dicas) {
-		this.dicas.addAll(dicas);
+	public void setDica(String dica) {
+		this.dica = dica;
 	}
 
 	public Integer getTamanhoPalavra() {
@@ -79,16 +61,15 @@ public class Palavra {
 
 	@Override
 	public String toString() {
-		return "Palavra [id=" + id + ", palavra=" + palavra + ", descricao=" + descricao + ", dica=" + dicas
-				+ ", tamanhoPalavra=" + tamanhoPalavra + "]";
+		return "Palavra [id=" + id + ", palavra=" + palavra + ", dica=" + dica + ", tamanhoPalavra=" + tamanhoPalavra
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((dicas == null) ? 0 : dicas.hashCode());
+		result = prime * result + ((dica == null) ? 0 : dica.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((palavra == null) ? 0 : palavra.hashCode());
 		result = prime * result + ((tamanhoPalavra == null) ? 0 : tamanhoPalavra.hashCode());
@@ -104,15 +85,10 @@ public class Palavra {
 		if (getClass() != obj.getClass())
 			return false;
 		Palavra other = (Palavra) obj;
-		if (descricao == null) {
-			if (other.descricao != null)
+		if (dica == null) {
+			if (other.dica != null)
 				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (dicas == null) {
-			if (other.dicas != null)
-				return false;
-		} else if (!dicas.equals(other.dicas))
+		} else if (!dica.equals(other.dica))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -131,5 +107,5 @@ public class Palavra {
 			return false;
 		return true;
 	}
-
+	
 }
