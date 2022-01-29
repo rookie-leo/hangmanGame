@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.hangman.controller.dto.PalavraRequest;
-import com.project.hangman.controller.dto.PalavraResponse;
+import com.project.hangman.controller.request.PalavraRequest;
+import com.project.hangman.controller.response.PalavraResponse;
 import com.project.hangman.model.Palavra;
 import com.project.hangman.service.PalavraService;
 

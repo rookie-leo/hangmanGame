@@ -1,24 +1,21 @@
-package com.project.hangman.controller.dto;
+package com.project.hangman.controller.response;
 
 import java.util.List;
 
-import com.project.hangman.model.Dica;
 import com.project.hangman.model.Palavra;
 
 public class PalavraResponse {
 	
 	private String palavra;
-	private String descricao;
-	private List<Dica> dicas;
 	private Integer tamanhoPalavra;
+	private List<String> dicas;
 	
 	public PalavraResponse() {}
 
 	public PalavraResponse(Palavra response) {
 		super();
 		this.palavra = response.getPalavra();
-		this.descricao = response.getDescricao();
-		this.dicas = response.getDica();
+		this.dicas = response.getDicas();
 		this.tamanhoPalavra = response.getTamanhoPalavra();
 	}
 
@@ -26,18 +23,24 @@ public class PalavraResponse {
 		return palavra;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public void setPalavra(String palavra) {
+		this.palavra = palavra;
 	}
 
-	public List<Dica> getDicas() {
+	public List<String> getDicas() {
 		return dicas;
+	}
+
+	public void setDicas(List<String> dicas) {
+		this.dicas = dicas;
 	}
 
 	public Integer getTamanhoPalavra() {
 		return tamanhoPalavra;
 	}
-	
-	
+
+	public void setTamanhoPalavra(Integer tamanhoPalavra) {
+		this.tamanhoPalavra = tamanhoPalavra;
+	}
 
 }
