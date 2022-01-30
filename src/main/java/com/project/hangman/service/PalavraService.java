@@ -26,5 +26,21 @@ public class PalavraService {
 	public List<Palavra> listar() {
 		return repository.findAll();
 	}
+	
+	/**
+	 * @method escolhe uma palavra aleatoriamente na tabela de palavras cadastradas
+	 * @return retorna uma palavra
+	 * */
+	public Palavra escolherPalavra() {
+		List<Palavra> palavras = listar();
+		Double random = Math.random();
+		int escolhido = (int) (1 + random * (palavras.size() - 1));
+		Palavra palavra = palavras.get(escolhido);
+		
+		return palavra;
+	}
 
+	public void desmontarPalavra(String palavra) {
+		char[] conjunto = palavra.toCharArray();
+	}
 }
