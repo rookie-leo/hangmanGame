@@ -40,7 +40,8 @@ public class PalavraService {
 		return palavra;
 	}
 
-	public void desmontarPalavra(String palavra) {
-		char[] conjunto = palavra.toCharArray();
+	public char[] desmontarPalavra(String palavra) {
+		 char[] conjunto = palavra.toCharArray();
+		 return  conjunto;
 	}
 }
