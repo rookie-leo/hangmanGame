@@ -16,7 +16,7 @@ public class PartidaService {
 	public void partida(List<Jogador> jogadores) {
 		Palavra palavra = pService.escolherPalavra();
 		char[] conjunto = pService.desmontarPalavra(palavra.getPalavra());
-		
+		char[] icognito = pService.escondePalavra(conjunto);
 		
 		
 		while (true) {
