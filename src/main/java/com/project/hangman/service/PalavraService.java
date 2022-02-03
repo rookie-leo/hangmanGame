@@ -55,7 +55,7 @@ public class PalavraService {
 		char[] icognito = new char[palavra.length];
 
 		for (int i = 0; i == palavra.length; i++) {
-			icognito[i] = '?';
+			icognito[i] = '_';
 		}
 
 		return icognito;
