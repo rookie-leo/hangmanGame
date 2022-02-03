@@ -35,4 +35,8 @@ public class HangmanService {
 		
 		return icognito;
 	}
+	
+	public void verificaPalavra(char letra) {
+		//TODO implementar a logica que irá verificar se a palavra contem a letra digitada 
+	}
 }
