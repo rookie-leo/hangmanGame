@@ -15,28 +15,39 @@ public class HangmanService {
 	private PalavraService pService;
 	
 	public void partida(List<Jogador> jogadores) {
-
-		
-//		
-//		while (true) {
-//			for (int rodada = 0; jogadores.size(); rodada++) {
-//			}
-//		}
+		//TODO esse método ficara encarregado de guardar os jogadores que estão na partida, e também a palavra
+		char[] palavra = escolhePalavra();
+		char[] icognito = escondePalavra(palavra);
+			
+		while (icognito != palavra) {
+			for (int rodada = 0; jogadores.size() == rodada; rodada++) {
+				jogadores.get(rodada);
+			}
+		}
 	}
 	
 	/**
-	 * @method escolhe uma palavra aleatoriamente no banco de dados e transforma ela em um array de caracteres '_'
-	 * @return retorna um array array de caracteres '_'
+	 * @method escolhe uma palavra aleatoriamente no banco de dados e transforma ela em um array de caracteres
+	 * @return retorna um array array de caracteres
 	 * */
-	public char[] trabalhaPalavra() {
+	public char[] escolhePalavra() {
 		Palavra palavra = pService.escolherPalavra();
 		char[] conjunto = pService.desmontarPalavra(palavra.getPalavra());
-		char[] icognito = pService.escondePalavra(conjunto);
 		
+		return conjunto;
+	}
+	
+	public char[] escondePalavra(char[] palavra) {
+		char[] icognito = pService.escondePalavra(palavra);
 		return icognito;
 	}
 	
-	public void verificaPalavra(char letra) {
+	public void verificaPalavra() {
 		//TODO implementar a logica que irá verificar se a palavra contem a letra digitada 
 	}
+	
+	public void recebeLetra(Character letra) {
+		
+	}
+	
 }
