@@ -2,6 +2,7 @@ package com.project.hangman.model;
 
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ public class Hangman {
 	private Integer wrongAttempts;
 	private Boolean correctLetter;
 	private Boolean gameOver;
+	@ElementCollection
 	private Set<Character> listAttempt;
 	private String msg;
 	

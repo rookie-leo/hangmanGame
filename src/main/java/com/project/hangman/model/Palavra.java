@@ -3,6 +3,7 @@ package com.project.hangman.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ public class Palavra {
 	private Long id;
 	private @NotBlank @Min(1) String palavra;
 	@ElementCollection
+	@Column(name = "DICAS")
 	private @NotNull @Min(1) List<String> dicas = new ArrayList<String>();
 
 	private @NotNull Integer tamanhoPalavra;
@@ -29,7 +31,7 @@ public class Palavra {
 	public Palavra(@NotBlank @Min(1) String palavra, @NotNull List<String> dicas) {
 		this.palavra = palavra;
 		this.dicas = dicas;
-		this.tamanhoPalavra = palavra.length();
+		this.tamanhoPalavra = palavra.trim().length();
 	}
 
 	public Long getId() {

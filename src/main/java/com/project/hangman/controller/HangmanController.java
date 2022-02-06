@@ -20,8 +20,8 @@ public class HangmanController {
 		return service.trabalhaPalavra();
 	}
 	
-	public char[] recebeLetra(@RequestBody char letra) {
-		//TODO implementar a logica que ira receber uma letra e verificar se palavra contem a letra digitada
-	}
+//	public char[] recebeLetra(@RequestBody Character letra) {
+//		//TODO implementar a logica que ira receber uma letra e verificar se palavra contem a letra digitada
+//	}
 	
 }
