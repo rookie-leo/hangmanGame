@@ -1,5 +1,7 @@
 package com.project.hangman.controller.request;
 
+import com.project.hangman.model.Jogador;
+
 public class JogadorRequest {
 	
 	private String nome;
@@ -16,6 +18,10 @@ public class JogadorRequest {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public Jogador toModel() {
+		return new Jogador(this.nome);
 	}
 	
 }
