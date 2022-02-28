@@ -31,7 +31,7 @@ public class Palavra {
 	public Palavra(@NotBlank @Min(1) String palavra, @NotNull List<String> dicas) {
 		this.palavra = palavra;
 		this.dicas = dicas;
-		this.tamanhoPalavra = palavra.trim().length();
+		this.tamanhoPalavra = calculaTamanhoPalavra(palavra); 
 	}
 
 	public Long getId() {
@@ -64,6 +64,14 @@ public class Palavra {
 
 	public void setTamanhoPalavra(Integer tamanhoPalavra) {
 		this.tamanhoPalavra = tamanhoPalavra;
+	}
+	
+	private int calculaTamanhoPalavra(String palavra) {
+		String[] array = palavra.split(" ");
+		String novaPalvra = "";
+		for (int i = 0; i <array.length; i++) novaPalvra += array[i];
+		
+		return novaPalvra.length();
 	}
 
 	@Override
