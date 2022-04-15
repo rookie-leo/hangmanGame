@@ -2,10 +2,12 @@ package com.project.hangman.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Hangman {
@@ -22,11 +24,13 @@ public class Hangman {
 	@ElementCollection
 	private Set<Character> listAttempt;
 	private String msg;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Partida partida;
 	
 	public Hangman() {}
 
 	public Hangman(Long id, String result, String hangMan, Integer maxAttempts, Integer wrongAttempts,
-			Boolean correctLetter, Boolean gameOver, Set<Character> listAttempt, String msg) {
+			Boolean correctLetter, Boolean gameOver, Set<Character> listAttempt, String msg, Partida partida) {
 		super();
 		this.id = id;
 		this.result = result;
@@ -37,6 +41,7 @@ public class Hangman {
 		this.gameOver = gameOver;
 		this.listAttempt = listAttempt;
 		this.msg = msg;
+		this.partida = partida;
 	}
 
 	public Long getId() {
@@ -110,12 +115,40 @@ public class Hangman {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	
+	public Partida getPartida() {
+		return partida;
+	}
+	
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
 
 	@Override
 	public String toString() {
-		return "Hangman [id=" + id + ", result=" + result + ", hangMan=" + hangMan + ", maxAttempts=" + maxAttempts
-				+ ", wrongAttempts=" + wrongAttempts + ", correctLetter=" + correctLetter + ", gameOver=" + gameOver
-				+ ", listAttempt=" + listAttempt + ", msg=" + msg + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Hangman [id=");
+		builder.append(id);
+		builder.append(", result=");
+		builder.append(result);
+		builder.append(", hangMan=");
+		builder.append(hangMan);
+		builder.append(", maxAttempts=");
+		builder.append(maxAttempts);
+		builder.append(", wrongAttempts=");
+		builder.append(wrongAttempts);
+		builder.append(", correctLetter=");
+		builder.append(correctLetter);
+		builder.append(", gameOver=");
+		builder.append(gameOver);
+		builder.append(", listAttempt=");
+		builder.append(listAttempt);
+		builder.append(", msg=");
+		builder.append(msg);
+		builder.append(", partida=");
+		builder.append(partida);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	@Override
@@ -129,6 +162,7 @@ public class Hangman {
 		result = prime * result + ((listAttempt == null) ? 0 : listAttempt.hashCode());
 		result = prime * result + ((maxAttempts == null) ? 0 : maxAttempts.hashCode());
 		result = prime * result + ((msg == null) ? 0 : msg.hashCode());
+		result = prime * result + ((partida == null) ? 0 : partida.hashCode());
 		result = prime * result + ((this.result == null) ? 0 : this.result.hashCode());
 		result = prime * result + ((wrongAttempts == null) ? 0 : wrongAttempts.hashCode());
 		return result;
@@ -178,6 +212,11 @@ public class Hangman {
 				return false;
 		} else if (!msg.equals(other.msg))
 			return false;
+		if (partida == null) {
+			if (other.partida != null)
+				return false;
+		} else if (!partida.equals(other.partida))
+			return false;
 		if (result == null) {
 			if (other.result != null)
 				return false;
@@ -190,5 +229,6 @@ public class Hangman {
 			return false;
 		return true;
 	}
-	
+
+		
 }

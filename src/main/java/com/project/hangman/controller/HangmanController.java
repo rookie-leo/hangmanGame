@@ -23,18 +23,10 @@ public class HangmanController {
 	
 	@Autowired
 	private JogadorService jService;
-	
-	@GetMapping("/palavra")
-	public char[] mostraPalavra() {
-		return service.trabalhaPalavra();
+		
+	public ResponseEntity<?> match(Character letra) {
+		service.partida();
+		
 	}
-	
-//	public char[] recebeLetra(@RequestBody Character letra) {
-//		//TODO implementar a logica que ira receber uma letra e verificar se palavra contem a letra digitada
-//	}
-	
-	public ResponseEntity<?> jogo(@Valid @RequestBody JogadorRequest request) {
-		Jogador jogador = jService.buscarPorNome(request.getNome());
-	}
-	
+		
 }
