@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.hangman.model.Hangman;
 import com.project.hangman.model.Jogador;
 import com.project.hangman.model.Palavra;
 
@@ -14,15 +15,20 @@ public class HangmanService {
 	@Autowired
 	private PalavraService pService;
 	
-	public void partida(List<Jogador> jogadores) {
+	private Hangman hang = new Hangman();
+	
+	public void partida(char letra) {
 		//TODO esse método ficara encarregado de guardar os jogadores que estão na partida, e também a palavra
 		char[] palavra = escolhePalavra();
 		char[] icognito = escondePalavra(palavra);
 			
 		while (icognito != palavra) {
-			for (int rodada = 0; jogadores.size() == rodada; rodada++) {
-				jogadores.get(rodada);
-			}
+//			for (int rodada = 0; rodada < 6; rodada++) {
+//				jogadores.get(rodada);
+//			}
+			recebeLetra();
+			
+			
 		}
 	}
 	
@@ -44,9 +50,10 @@ public class HangmanService {
 	
 	public void verificaPalavra() {
 		//TODO implementar a logica que irá verificar se a palavra contem a letra digitada 
+		
 	}
 	
-	public void recebeLetra(Character letra) {
+	public char recebeLetra(Character letra) {
 		
 	}
 	
