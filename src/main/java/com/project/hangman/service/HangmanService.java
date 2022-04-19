@@ -30,16 +30,15 @@ public class HangmanService {
 	}
 	
 	
-	public HangmanResponse partida() {
+	public void iniciar() {
 		char[] palavra = escolhePalavra();
-		hang.setHangMan(palavra.toString());
+		hang.setResult(palavra.toString());
 		char[] icognito = escondePalavra(palavra);
+		hang.setHangMan(icognito.toString());
 			
 		partida.findPartida(hang);
 		
-		while (icognito != palavra) {
-			
-		}
+		repository.save(hang);	
 	}
 	
 	/**
@@ -55,6 +54,12 @@ public class HangmanService {
 	
 	public char[] escondePalavra(char[] palavra) {
 		char[] icognito = pService.escondePalavra(palavra);
+		return icognito;
+	}
+	
+	public char[] escondePalavra(String palavra) {
+		char[] sequencia = pService.desmontarPalavra(palavra);
+		char[] icognito = pService.escondePalavra(sequencia);
 		return icognito;
 	}
 	
