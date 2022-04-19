@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.hangman.controller.response.HangmanResponse;
 import com.project.hangman.model.Hangman;
 import com.project.hangman.model.Palavra;
 import com.project.hangman.repository.HangmanRepository;
@@ -36,9 +35,11 @@ public class HangmanService {
 		char[] icognito = escondePalavra(palavra);
 		hang.setHangMan(icognito.toString());
 			
+		System.out.println(hang.getId());
+		repository.save(hang);
+		System.out.println(hang.getId());
 		partida.findPartida(hang);
 		
-		repository.save(hang);	
 	}
 	
 	/**
